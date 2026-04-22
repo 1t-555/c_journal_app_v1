@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Journal</title>
+    <link rel="stylesheet" href="journal_des.css">
+</head>
+<body>
+
+<div class="app-container">
+    <div id="calendarPage" class="page active">
+        <h1>2026年 4月</h1>
+        <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
+    <div id="entryPage" class="page">
+        <div class="back-btn" onclick="showPage('calendarPage')">← 戻る</div>
+    
+    <div class="entry-header">
+        <h2 id="selectedDateTitle">日付</h2>
+    </div>
+        
+    <div class="section">
+        <label>感情</label>
+        <div class="mood-selector">
+            <button class="mood-item" onclick="setMood('😊', this)"><span class="emoji">😊</span>最高</button>
+            <button class="mood-item" onclick="setMood('😌', this)"><span class="emoji">😌</span>充足</button>
+            <button class="mood-item" onclick="setMood('😐', this)"><span class="emoji">😐</span>普通</button>
+            <button class="mood-item" onclick="setMood('😟', this)"><span class="emoji">😟</span>微妙</button>
+            <button class="mood-item" onclick="setMood('😠', this)"><span class="emoji">😠</span>怒り</button>
+        </div>
+        
+    <div class="section">
+        <label>できごと</label>
+        <div class="activity-selector">
+            <button class="activity-item" onclick="setActivity('💪', this)"><span>💪</span>ジム</button>
+            <button class="activity-item" onclick="setActivity('📙', this)"><span>📙</span>読書</button>
+            <button class="activity-item" onclick="setActivity('🛒', this)"><span>🛒</span>買物</button>
+            <button class="activity-item" onclick="setActivity('🍳', this)"><span>🍳</span>自炊</button>
+            <button class="activity-item" onclick="setActivity('🧹', this)"><span>🧹</span>掃除</button>
+            <button class="activity-item" onclick="setActivity('🧵', this)"><span>🧵</span>手芸</button>
+            <button class="activity-item" onclick="setActivity('📝', this)"><span>📝</span>勉強</button>
+            <button class="activity-item" onclick="setActivity('👯‍♀️', this)"><span>👯‍♀️</span>友達</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <label>今日のひとこと</label>
+        <textarea id="memo" placeholder="今日のひとこと"></textarea>
+    </div>
+    
+    <button class="save-btn" onclick="saveData()">この日を記録する</button>
+
+</div>
+
+<script src="journal_op.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+:root { --primary: #6c5ce7; --bg: #f9f9fb; }
+body { font-family: sans-serif; background: var(--bg); margin: 0; }
+.app-container { max-width: 400px; margin: auto; background: white; min-height: 100vh; display: flex; flex-direction: column; }
+
+.page { display: none; padding: 20px; }
+.active { display: block; }
+
+        /* カレンダーのデザイン */
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 20px; }
+.calendar-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #eee; border-radius: 8px; cursor: pointer; font-size: 0.9rem; position: relative; }
+.calendar-day:active { background: #eee; }
+.has-data::after { content: '●'; color: var(--primary); font-size: 0.5rem; position: absolute; bottom: 2px; }
+
+        /* 気分選択ボタンのデザイン */
+/*.mood-selector { display: flex; justify-content: space-around; margin: 20px 0; }*/
+.mood-selector {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0; 
+}
+.mood-item { 
+    border: 2px solid transparent; /* 初期状態は透明な枠 */
+    background: none; 
+    cursor: pointer; 
+    text-align: center; 
+    padding: 2px 10px;
+    transition: 0.2s;
+    border-radius: 12px;
+    margin-top: -2px;
+}
+        /* 選択中の背景色を濃くする */
+.mood-item.selected {
+    background-color: #dfe6e9; 
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+.emoji { font-size: 2rem; display: block; }
+textarea { width: 100%; height: 100px; border-radius: 10px; border: 1px solid #ddd; padding: 10px; box-sizing: border-box; margin-top: 10px; }
+.save-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; margin-top: 10px; font-weight: bold; }
+.back-btn { color: var(--primary); cursor: pointer; margin-bottom: 10px; display: inline-block; }
+
+.section label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #636e72;
+    margin-top: 15px;
+    margin-bottom: 8px; 
+}
+
+/* できごとセレクターの横並び設定 */
+.activity-selector {
+    display: grid;
+    /* 1行に8等分 (隙間を5px空ける) */
+    grid-template-columns: repeat(8, 1fr); 
+    gap: 5px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.activity-item {
+    border: 1px solid #dfe6e9;
+    background: white;
+    cursor: pointer;
+    /* パディングを最小限にして詰め込む */
+    padding: 4px 0; 
+    border-radius: 8px;
+    /* 文字サイズを小さく (10px〜11pxくらい) */
+    font-size: 0.65rem;
+    display: flex;
+    flex-direction: column; /* 絵文字と文字を縦に並べる */
+    align-items: center;
+    transition: 0.2s;
+}
+
+.activity-item span {
+    font-size: 1.1rem; /* 絵文字だけは少し大きく */
+    margin-bottom: 2px;
+}
+
+.activity-item.selected {
+    background-color: #cbd0f7;
+    /*border-color: var(--primary);*/
+    transform: scale(1.1);
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    border-radius: 12px;
+    border: 1px solid #dfe6e9;
+    padding: 12px;
+    box-sizing: border-box;
+    resize: none;
+    margin-top: 0;
+}
