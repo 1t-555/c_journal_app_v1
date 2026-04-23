@@ -20,19 +20,16 @@
     <div class="entry-header">
         <h2 id="selectedDateTitle">
             <span id="displayDate">4月 9日</span>
-            <input type="time" id="entryTime" class="header-time-input">
+            <div class="time-wrapper">
+                <span id="timeText">23:23</span>
+                <input type="time" id="entryTime" class="hidden-time-input" oninput="syncTime()">
+            </div>
             <span class="title-suffix">の記録</span>
         </h2>
     </div>
 
-    <div class="section">
-        <label>★ 時刻</label>
-        <input type="time" id="entryTime" class="time-input">
-    </div>
 
 
-            
-    
         
     <div class="section">
         <label>感情</label>
