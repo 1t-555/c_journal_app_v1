@@ -46,6 +46,18 @@ body { font-family: sans-serif; background: var(--bg); margin: 0; }
     display: none; /* デフォルトの時計アイコンを隠す（数字タップで起動するため） */
 }
 
+.time-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #dfe6e9;
+    font-size: 1.2rem; /* 数字を見やすく大きく */
+    font-family: inherit;
+    color: #2d3436;
+    background: #fdfdfe;
+    box-sizing: border-box;
+}
+
 .title-suffix {
     font-size: 1.1rem;
     font-weight: normal;
