@@ -33,7 +33,7 @@ function openEntry(day) {
     selectedActivity = entry.activity || '';
 
     // 時刻のセット
-    let targetTime = entry.time;
+    let targetTime = entry.time || "12:00";
     if (!targetTime) {
         const now = new Date();
         const hh = String(now.getHours()).padStart(2, '0');
@@ -43,10 +43,17 @@ function openEntry(day) {
     
     // タイトルの中にある入力欄にセット
     document.getElementById('entryTime').value = targetTime;
+    document.getElementById('timeText').innerText = targetTime;
 
     resetMoodButtons(selectedMood);
     resetActivityButtons(selectedActivity);
     showPage('entryPage');
+}
+
+// 入力フォームと表示用テキストを同期させる
+function syncTime() {
+    const timeVal = document.getElementById('entryTime').value;
+    document.getElementById('timeText').innerText = timeVal;
 }
 
     // 3. 気分を選択したときの処理（アラートなし）

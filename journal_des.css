@@ -19,16 +19,19 @@ body { font-family: sans-serif; background: var(--bg); margin: 0; }
 .entry-header h2 {
     display: flex;
     align-items: center; /* 垂直方向を真ん中に */
+    justify-content: flex-start;
     gap: 8px;
     font-size: 1.4rem;
     color: #2d3436;
     margin: 10px 0 30px 0;
     border-bottom: 2px solid #eee;
     padding-bottom: 10px;
+    white-space: nowrap;
 }
 
 /* ヘッダー内の時刻のデザイン */
 .header-time-input {
+    width: auto;
     font-size: 1.4rem; /* タイトルと同じ大きさに */
     font-family: inherit;
     font-weight: bold;
@@ -39,6 +42,11 @@ body { font-family: sans-serif; background: var(--bg); margin: 0; }
     margin: 0;
     cursor: pointer;
     outline: none; /* クリックした時の青い枠を消す */
+    text-align: center;
+    /* ↓ ここが重要：ブラウザが右側に作る「余白（アイコン用）」を消す */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 /* スマホでタップしやすくするための微調整 */
@@ -46,22 +54,33 @@ body { font-family: sans-serif; background: var(--bg); margin: 0; }
     display: none; /* デフォルトの時計アイコンを隠す（数字タップで起動するため） */
 }
 
-.time-input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #dfe6e9;
-    font-size: 1.2rem; /* 数字を見やすく大きく */
-    font-family: inherit;
-    color: #2d3436;
-    background: #fdfdfe;
-    box-sizing: border-box;
+.title-suffix {
+    font-size: 1.0rem;
+    font-weight: bold;
 }
 
-.title-suffix {
-    font-size: 1.1rem;
-    font-weight: normal;
-    /*color: #b2bec3;*/
+.time-wrapper {
+    position: relative; /* 重ねるための基準 */
+    display: inline-block;
+    color: #6c5ce7;
+    font-weight: bold;
+}
+
+/* 表示用の文字 */
+#timeText {
+    padding: 2px 4px;
+}
+
+/* 背後（実際は上）にある本物の入力フォーム */
+.hidden-time-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* ★ここが魔法：完全に透明にする */
+    cursor: pointer;
+    font-size: 16px; /* iOSでズームされるのを防ぐサイズ */
 }
 
 /* 感情 */
