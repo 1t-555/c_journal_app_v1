@@ -20,20 +20,32 @@ function createCalendar() {
     }
 }
 
-    // 2. 日付を選択して記録画面を開く
+// openEntry関数を更新
 function openEntry(day) {
     currentDay = day;
-    document.getElementById('selectedDateTitle').innerText = `4月 ${day}日の記録`;
-        
-        // 保存済みデータがあれば読み込み、なければリセット
-    const entry = database[day] || { mood: '😐', event: '', memo: '' };
+    // 日付だけをセット
+    document.getElementById('displayDate').innerText = `4月 ${day}日`;
+    
+    const entry = database[day] || { mood: '😐', activity: '', memo: '', time: '' };
     document.getElementById('memo').value = entry.memo;
+    
     selectedMood = entry.mood;
-    selectedEvent = entry.event;
+    selectedActivity = entry.activity || '';
 
-        // ボタンの見た目を選択状態に合わせる
+    // 時刻のセット
+    let targetTime = entry.time;
+    if (!targetTime) {
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        targetTime = `${hh}:${mm}`;
+    }
+    
+    // タイトルの中にある入力欄にセット
+    document.getElementById('entryTime').value = targetTime;
+
     resetMoodButtons(selectedMood);
-    resetEventButtons(selectedEvent);
+    resetActivityButtons(selectedActivity);
     showPage('entryPage');
 }
 
@@ -44,13 +56,6 @@ function setMood(emoji, element) {
     document.querySelectorAll('.mood-item').forEach(btn => btn.classList.remove('selected'));
     element.classList.add('selected');
 }
-function setEvent(emoji, element) {
-    selectedEvent = emoji;
-        // 全ボタンから選択クラスを消して、クリックしたものだけに付ける
-    document.querySelectorAll('.event-item').forEach(btn => btn.classList.remove('selected'));
-    element.classList.add('selected');
-}
-
 // できごとを選択した時の関数
 function setActivity(emoji, element) {
     selectedActivity = emoji;
@@ -58,22 +63,6 @@ function setActivity(emoji, element) {
     element.classList.add('selected');
 }
 
-// openEntry関数の中身を更新
-function openEntry(day) {
-    currentDay = day;
-    document.getElementById('selectedDateTitle').innerText = `4月 ${day}日の記録`;
-    
-    const entry = database[day] || { mood: '😐', activity: '', memo: '' }; // activityを追加
-    document.getElementById('memo').value = entry.memo;
-    
-    selectedMood = entry.mood;
-    selectedActivity = entry.activity || ''; // ★追加
-
-    resetMoodButtons(selectedMood);
-    resetActivityButtons(selectedActivity); // ★追加
-    
-    showPage('entryPage');
-}
 
     // 4. ボタンの見た目をリセットする
 function resetMoodButtons(activeEmoji) {
@@ -105,9 +94,10 @@ async function saveData() {
 
     const data = {
         date: dateKey,
-        mood: selectedMood,
-        activity: selectedActivity, 
-        memo: document.getElementById('memo').value
+        time: document.getElementById('entryTime').value || "", 
+        mood: selectedMood || "😐",
+        activity: selectedActivity || "",
+        memo: document.getElementById('memo').value || ""
     };
 
         // 先に画面を更新（爆速！）
